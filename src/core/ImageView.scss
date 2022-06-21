@@ -1,0 +1,183 @@
+$color-primary: #0087c0;
+$color-secondary: #81cbea;
+$color-success: #04ae38;
+$color-warning: #f3d93f;
+$color-danger: #e06262;
+$color-dark-grey: #666;
+$color-info: #999999;
+$color-text: #333;
+$color-text-white: #fff;
+$color-text-light: #ddd;
+
+$color-bg-dark: #282d35;
+$color-bg-dark-grey: #383e4a;
+$color-bg-black: #1e2127;
+$color-bg-dark-black: #000;
+
+$color-bg-light: #bbb;
+$color-bg-white: #eee;
+$color-text-dark: #282d35;
+$color-text-dark-grey: #383e4a;
+
+$color-bg-black-opacity: rgba(0, 0, 0, 0.6);
+$color-bg-secondary-opacity: rgba($color-secondary, 0.5);
+
+$border-bottom: 1px solid #f6f6f6;
+$border-input: 1px solid #eee;
+
+@mixin toobar-btn {
+  background: $color-bg-dark-grey;
+  color: $color-info;
+  text-align: center;
+  border-radius: 5px;
+  width: 35px;
+  height: 25px;
+  line-height: 25px;
+  user-select: none;
+  &:hover {
+    background: lighten($color: $color-bg-dark-grey, $amount: 5);
+    color: $color-text-white;
+  }
+}
+
+@mixin primary-btn {
+  cursor: pointer;
+  background: $color-primary;
+  color: $color-text-light;
+  text-align: center;
+  border-radius: 3px;
+  height: 40px;
+  line-height: 40px;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    color: $color-text-white;
+    background: lighten($color: $color-primary, $amount: 5);
+  }
+
+  &:disabled {
+    background: $color-bg-dark-grey;
+    color: $color-info;
+    border: 0;
+    &:hover {
+      background: lighten($color: $color-bg-dark-grey, $amount: 5);
+      color: $color-info;
+    }
+  }
+}
+
+@mixin default-btn {
+  cursor: pointer;
+  background: lighten($color: $color-bg-dark-grey, $amount: 5);
+  color: $color-text-light;
+  text-align: center;
+  border-radius: 5px;
+  height: 40px;
+  padding: 20px;
+  box-sizing: border-box;
+
+  line-height: 25px;
+  user-select: none;
+  transition: all 0.3s ease-in-out;
+
+  &:hover {
+    background: lighten($color: $color-bg-dark-grey, $amount: 10);
+    color: $color-text-white;
+  }
+}
+
+@mixin scroller {
+  &::-webkit-scrollbar {
+    width: 6px; //y轴滚动条粗细
+    height: 6px; //x轴滚动条粗细
+  }
+
+  /*定义滚动条轨道 */
+  &::-webkit-scrollbar-track {
+    box-shadow: 0;
+    background: transparent; //滚动槽背景色
+    border-radius: 5px; //滚动条边框半径设置
+  }
+
+  /*定义滑块 内阴影+圆角*/
+  &::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    box-shadow: 0;
+    background: lighten($color: $color-bg-dark-grey, $amount: 5);
+    margin-bottom: 10px;
+  }
+}
+
+
+$transitionDuration: 0.2s;
+$transitionFunc: ease-out;
+$zIndex: 800;
+
+.zoom-pan-image-view-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  // overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  .img-state {
+    position: absolute;
+    z-index: 801;
+    top: 0;
+    right: 0;
+    opacity: 0.8;
+    background-color: $color-bg-dark-black;
+    font-size: 10px;
+    color: $color-info;
+    padding: 5px;
+  }
+
+  .split-view {
+    background: $color-bg-dark-black;
+    flex: 1;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    &:nth-last-child(2) {
+      border-right: 2px solid $color-bg-dark;
+    }
+
+    .img-info {
+      position: absolute;
+      top: -20px;
+      font-size: 10px;
+      color: $color-info;
+    }
+  }
+  .image-view-transform-area {
+    width: 100%;
+    height: 100%;
+    img.img {
+      display: block;
+      width: auto;
+      height: auto;
+      user-select: none;
+
+      &.drag {
+        cursor: move;
+      }
+
+      &.image-transition {
+        transition-property: width, height, margin, transform;
+        transition-duration: $transitionDuration;
+        transition-timing-function: $transitionFunc;
+      }
+    }
+  }
+
+  .img-loading {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+  }
+}

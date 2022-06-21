@@ -198,8 +198,6 @@ class ImagePreview extends Component<PreviewProps, PreviewState> {
     );
   };
 
-  private needRaf = true;
-
   handleMove = (e: MouseEvent) => {
     e.preventDefault();
     if (this.state.isDragging) {
